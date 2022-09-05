@@ -15,11 +15,13 @@ function App() {
     height: '100vh',
   };
 
-  React.useEffect(() => {
-  axios.get("/api/todos/"). then((response) => {
-    setTodos(response.data);
 
-console.log()
+
+  React.useEffect(() => {
+  axios.get("/api/todos/").then((response) => {
+    const todo = response.data;
+    setTodos(todo);
+
     });
   }, [todos]);
 
