@@ -6,7 +6,6 @@ import axios from 'axios';
 // const baseURL = 'http://localhost:8000/';
 
 function App() {
-  const [taskList, setTaskList] = React.useState(0);
   const [todos, setTodos] = React.useState([]);
  
   const styles = {
