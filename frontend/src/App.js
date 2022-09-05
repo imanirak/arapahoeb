@@ -6,6 +6,7 @@ import axios from 'axios';
 // const baseURL = 'http://localhost:8000/';
 
 function App() {
+  const [taskList, setTaskList] = React.useState(0);
   const [todos, setTodos] = React.useState([]);
  
   const styles = {
@@ -15,11 +16,13 @@ function App() {
     height: '100vh',
   };
 
-  React.useEffect(() => {
-  axios.get("/api/todos/"). then((response) => {
-    setTodos(response.data);
 
-console.log()
+
+  React.useEffect(() => {
+  axios.get("/api/todos/").then((response) => {
+    const todo = response.data;
+    setTodos(todo);
+
     });
   }, [todos]);
 
