@@ -26,7 +26,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'http://127.0.0.1:3000', 'http://localhost:3000/']
 
 
 # Application definition
@@ -65,7 +65,16 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     'https://localhost:3000'
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
+CORS_ALLOW_METHODS = [
+'DELETE',
+'GET',
+'OPTIONS',
+'PATCH',
+'POST',
+'PUT',
+]
 
 ROOT_URLCONF = 'backend.urls'
 

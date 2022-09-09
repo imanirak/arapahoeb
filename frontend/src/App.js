@@ -1,23 +1,13 @@
 
-import './App.css';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-
-// const baseURL = 'http://localhost:8000/';
+import DeleteTodo from '././components/deleteTodo';
 
 function App() {
-  const [todos, setTodos] = React.useState([]);
- 
-  const styles = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-  };
+  const [todos, setTodos] = useState([]);
 
 
-
-  React.useEffect(() => {
+  useEffect(() => {
   axios.get("/api/todos/").then((response) => {
     const todo = response.data;
     setTodos(todo);
@@ -25,28 +15,32 @@ function App() {
     });
   }, [todos]);
 
+  
 
   return (
   
-    <div className="App" style={styles}>
+    <div className="App" >
 
     <table>
+    <tbody>
     <tr>
-    
       <th><h2>ID</h2></th>
       <th><h2>Title</h2></th>
       <th><h2>Description</h2></th>
       <th><h2>Status</h2></th>
     </tr>
+    </tbody>
     {todos?.map((item, i) => (
-    <tr key={i}>
+      <tbody key={i}>
+    <tr>
     <td><h2>{item.id}</h2></td>
     <td>{item.title}</td>
     <td>{item.description}</td>
-    {/* checked={item.completed} */}
     <td>  <input type="checkbox"  /></td>
+    
+    <td><DeleteTodo item={item.id}/></td>
     </tr>
-
+</tbody>
 ))}
 </table>    
     </div>
