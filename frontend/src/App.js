@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import DeleteTodo from '././components/deleteTodo';
+import EditTodo from '././components/editTodo'
 
 function App() {
   const [todos, setTodos] = useState([]);
+
 
 
   useEffect(() => {
@@ -12,10 +14,12 @@ function App() {
     const todo = response.data;
     setTodos(todo);
 
+
     });
   }, [todos]);
 
-  
+
+
 
   return (
   
@@ -36,9 +40,12 @@ function App() {
     <td><h2>{item.id}</h2></td>
     <td>{item.title}</td>
     <td>{item.description}</td>
-    <td>  <input type="checkbox"  /></td>
+    <td>  <input type="checkbox"/></td>
     
     <td><DeleteTodo item={item.id}/></td>
+    <td><EditTodo item={item} todos={todos}/></td>
+    {/* <td> <button onClick={item.id}>update</button></td> */}
+   
     </tr>
 </tbody>
 ))}
