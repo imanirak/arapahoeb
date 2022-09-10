@@ -1,32 +1,43 @@
-
+import axios from "axios";
 import { useState } from 'react';
-import axios from 'axios';
 
-const TodoCreate = () => {
 
-    const [description, setDescription] = useState("");
+export default function EditTodo(props) {
+    const [isShown, setIsShown] = useState(false);
     const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [completed, setCompleted] = useState(false);
+  
+    const item = props.item;
+  
+ 
+  function updateTodo() {
+    const newTodo = {title:title, description:description, completed:completed}
+    axios
+      .put(`api/todos/${item.id}/`, 
+        newTodo
+      )
+      .then((response) => {
+        setTitle("")
+        setDescription("")
+        setCompleted(true)
 
-    const handleSubmit = () => {
-        let newTodo = { title, description, completed };
-         axios.post("api/todos/", newTodo)
-            .then((response) => {
-                setTitle("");
-                setDescription("");
-                setCompleted(false);
-                console.log(newTodo)
-                console.log( response.data);
-       
-            });
-    
-        }
+      });
+  }
+
+  const handleClick = event => {
+    setIsShown(current => !current);
+  };
+
 
 
   return (
-    <div>
-        <h1>Create new todo</h1>
-        <form id="todoCreate">
+<div>
+<button className="standardButton" onClick={handleClick}>edit</button>
+{isShown && (
+  <div>
+  <h1>Create new todo</h1>
+        <form id="">
             <label className="formInput"> Title</label>
             <input 
             className="input"
@@ -51,13 +62,12 @@ const TodoCreate = () => {
             onChange={(e) => setCompleted(e.target.value)}
             // value={completed}
             defaultChecked={completed}
-            type="checkbox"
+            type="textbox"
             name=""
              />
-<button type="submit" form="todoCreate" onClick={handleSubmit}>save</button>
+<button type="submit" form="" onClick={updateTodo}>save</button>
         </form>
-    </div>
-  )
-
-  }
-export default TodoCreate;
+  </div>
+)}
+</div>
+  );}
